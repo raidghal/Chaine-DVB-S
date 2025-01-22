@@ -46,6 +46,15 @@ for etatActuel = 1:nombreEtats
             'HorizontalAlignment', 'center', 'BackgroundColor', 'white'); % Étiquette des bits de sortie
     end
 end
+&&&&&&&&&&&&&&&&&&&&&&& la figure affichée est cellule élémentaire du treillis &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&& d'apres ce que j'ai compris d'un cours mis en ligne, je vous mets ci joint le lien du cours(slider 11), une cellule élémentaire 
+&&&&&&&& représente toutes les transitions possible. Du coup plus facile pour l'algo de viterbi.
+&&&&&&&&
+&&&&&&&& Lien : https://ensat.ac.ma/Portail/wp-content/uploads/2020/03/Modul25_TI_cours3.pdf
+&&&&&&&&
+&&&&&&&&
+&&&&&&&& 
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 %Ajuster l'affichage
 yticks(1:nombreEtats);
