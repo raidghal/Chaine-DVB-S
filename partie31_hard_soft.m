@@ -1,24 +1,26 @@
 clear all;
 close all;
 
+
+&&&&&&&&&&&& Partie 31 Hard et Soft &&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+
 %% Paramètres d'entrée
-Bw = 40; % Largeur de bande en Hz
 M = 4; % Ordre de modulation (QPSK)
 l = log2(M); % Nombre de bits par symbole
 nbits = 188 * 8; % Nombre total de bits à transmettre
-Ts = 1; % Durée d’un symbole
-Rs = 31.2; % Débit symbole (sym/s)
-Rb = Rs * l; % Débit binaire en bits par seconde
 alpha = 0.35; % Roll-off du filtre SRRC
-Fe = 2 * Bw; % Fréquence d'échantillonnage (Fe >= (1+alpha)*Rs)
 span = 10; % Longueur du filtre SRRC (en nombre de périodes symboles)
 Ns = 5; % Facteur de suréchantillonnage
-
 tb = 30; % Taille de la trace-back (code 1/2 donc 5*(7-1))
 
 %% Génération des bits et codage convolutif
 bits = randi([0, 1], 1, nbits); % Génération des bits aléatoires
-
 
 trellis = poly2trellis(7, [171 133]); % Génération du trellis
 
