@@ -1,6 +1,14 @@
 clear all;
 close all;
 
+
+&&&&&&&&&& Partie33 Introduction de lentrelaceur convolutif &&&&&&&&&&&&&
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
 %% Constantes d'entrée
 Bw = 40;
 M = 4; % Ordre de modulation
