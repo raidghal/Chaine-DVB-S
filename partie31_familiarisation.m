@@ -1,3 +1,16 @@
+clear all;
+close all;
+
+
+&&&&&&&&&&& Partie 3.1 familiarisation &&&&&&&&&&&&&&&&&&&&&
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
+
+
 %Définir les paramètres du code convolutif
 treillis = poly2trellis(3, [5, 7]); % Treillis du code convolutif (longueur de contrainte = 3, générateurs [5, 7] en octal)
 message = [0 1 0 1 1 0 1]; % Message binaire d'entrée
