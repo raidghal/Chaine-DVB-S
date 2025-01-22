@@ -1,24 +1,24 @@
-%% Questions
-%pertinence codage interne externe 
-%pourquoi entraleceur au milieu 
+clear all;
+close all;
+
+
+&&&&&&&&&&&&&&&&&& Partie 2 Implantation du modulateur/demodulateur &&&&&&&&&&&&&&&&&&&&&&&
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
 %% Constantes d'entrée
-Bw = 40;
 M = 4; % Ordre de modulation
 l = log2(M); % Nombre de bits par symbole
 nbits = 188*8; % Nombre total de bits à transmettre. 
-Ts = 1; % Durée d’un symbole
-Rs = 31.2; % Débit symbole (sym/s). 
-Rb = Rs*l; % Débit binaire en bits par seconde 
-Ru = 0; % Débit utile en bits par seconde
-Tb = 1/Rb; % Durée d’un bit 
 alpha = 0.35; % Roll-off du filtre SRRC (Square Root Raised Cosine)           
-Fe = 2*Bw; % Fréquence d2échantillonnage en Hz.  Fe >= (1+alpha)*Rs.
 span = 10; % Longueur du filtre SRRC (en nombre de périodes symboles). 
 Ns = 5; % Facteur de suréchantillonnage
         
 % Génération de bits et mapping QPSK
 bits = randi([0,1], 1, nbits); % Bits aléatoires
 symboles = (1 - 2 * bits(1:2:end)) + 1i * (1 - 2 * bits(2:2:end)); % Symboles complexes
+
 % Suréchantillonnage
 signal = kron(symboles, [1 zeros(1, Ns-1)]); % Ajout de zéros pour suréchantillonner
 % Filtre de mise en forme
