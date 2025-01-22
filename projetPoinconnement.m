@@ -9,7 +9,6 @@ close all
 Bw = 40;
 M = 4; % Ordre de modulation
 l = log2(M); % Nombre de bits par symbole
-nbits = 188*8; % Nombre total de bits à transmettre. 
 Ts = 1; % Durée d’un symbole
 Rs = 31.2; % Débit symbole (sym/s). 
 Rb = Rs*l; % Débit binaire en bits par seconde 
@@ -21,6 +20,7 @@ span = 10; % Longueur du filtre SRRC (en nombre de périodes symboles).
 Ns = 5; % Facteur de suréchantillonnage
 N = 204;
 K = 188;
+nbits = 188*204*2; % Nombre total de bits à transmettre. 
 
 
 % Génération de bits et mapping QPSK
