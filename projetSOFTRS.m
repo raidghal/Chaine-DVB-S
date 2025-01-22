@@ -5,16 +5,16 @@ close all;
 Bw = 40;
 M = 4; % Ordre de modulation
 l = log2(M); % Nombre de bits par symbole
-nbits = 188 * 8; % Nombre total de bits à transmettre
 Ts = 1; % Durée d’un symbole
 Rs = 31.2; % Débit symbole (sym/s)
 Rb = Rs * l; % Débit binaire en bits par seconde
 alpha = 0.35; % Roll-off du filtre SRRC
-Fe = 2 * Bw; % Fréquence d'échantillonnage en Hz (Fe >= (1+alpha)*Rs)
+Fe = 24000; % Fréquence d'échantillonnage en Hz (Fe >= (1+alpha)*Rs)
 span = 10; % Longueur du filtre SRRC (en périodes symboles)
 Ns = 5; % Facteur de suréchantillonnage
 N = 204;
 K = 188;
+nbits = 188 *N*2; % Nombre total de bits à transmettre
 
 
 
@@ -35,7 +35,7 @@ puncmat = [1 1 0 1];
 
 
 % Code externe Reed Solomon
-encoder_rs = comm.RSEncoder(N, K, 'BitInput',true);
+encoder_rs = comm.RSEncoder(N, K, BitInput=true);
 % Ajout du codage externe de Reed-Solomon
 bits_rs = step(encoder_rs, bits.').';
 code_rs_conv = convenc(bits_rs, trellis, puncmat);
@@ -94,7 +94,7 @@ for i = 1:length(EbN0)
     decodedsoft_rs = vitdec(bitsrecus_rs, trellis, tb, 'trunc', 'unquant', puncmat);
     
     % Decodage Reed-Salomon RS(204,188)
-    decoder_rs = comm.RSDecoder(N, K,'BitInput',true);
+    decoder_rs = comm.RSDecoder(N, K,BitInput=true);
     
     decodedsoft_rs_final = step(decoder_rs, decodedsoft_rs.');
     decodedsoft_rs_final = decodedsoft_rs_final.';
