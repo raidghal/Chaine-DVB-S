@@ -9,19 +9,19 @@ Ts = 1; % Durée d’un symbole
 Rs = 31.2; % Débit symbole (sym/s)
 Rb = Rs * l; % Débit binaire en bits par seconde
 alpha = 0.35; % Roll-off du filtre SRRC
-Fe = 2 * Bw; % Fréquence d'échantillonnage en Hz (Fe >= (1+alpha)*Rs)
+Fe = 24000; % Fréquence d'échantillonnage en Hz (Fe >= (1+alpha)*Rs)
 span = 10; % Longueur du filtre SRRC (en périodes symboles)
 Ns = 5; % Facteur de suréchantillonnage
 N = 204;
 K = 188;
-nbits = 188 * 8; % Nombre total de bits à transmettre
+nbits = 188 *N*2; % Nombre total de bits à transmettre
 
 %% Génération de bits
 bits = randi([0, 1], 1, nbits); % Bits aléatoires
 
 %% Codage RS
 % Initialisation des encodeurs Reed-Solomon
-encoder_rs = comm.RSEncoder(N, K, 'BitInput', true);
+encoder_rs = comm.RSEncoder(N, K, BitInput=true);
 
 % Codage RS avec entrelacement
 bits_rs = step(encoder_rs, bits.').'; % Codage RS
@@ -61,8 +61,6 @@ signal_sans_filtre = filter(h, 1, [signal_sans zeros(1, length(h) - 1)]); % Sans
 
 %% Canal AWGN
 EbN0 = -4:4; % Rapport Eb/N0 en dB
-EbN0lin = 10.^(EbN0 / 10); % Conversion en échelle linéaire
-TEB_theo = qfunc(sqrt(2 * EbN0lin)); % TEB théorique pour la QPSK
 
 % Initialisation des TEB
 TEBsoft_rs = [];
@@ -71,8 +69,9 @@ TEBsoft_sans = [];
 for i = 1:length(EbN0)
     %% Avec entrelacement
     % Bruit AWGN
-    Px_rs = mean(abs(signal_rs_filtre).^2);
-    sigma_rs = (Px_rs * Ns) / (2 * l * EbN0lin(i));
+    Px_rs = var(signal_rs_filtre);
+    EbN0lin = 10^(EbN0(i) / 10); % Conversion en échelle linéaire
+    sigma_rs = (Px_rs * Ns) / (2 * l * EbN0lin);
     bruit_reel_rs = sqrt(sigma_rs) * randn(size(signal_rs_filtre));
     bruit_imag_rs = sqrt(sigma_rs) * randn(size(signal_rs_filtre));
     bruit_rs = bruit_reel_rs + 1i * bruit_imag_rs;
@@ -100,7 +99,7 @@ for i = 1:length(EbN0)
     decodedsoft_rs_desentrelace = circshift(bits_desentrelacement, -8 * 3 * 7);
 
     % Décodage RS
-    decoder_rs = comm.RSDecoder(N, K, 'BitInput', true);
+    decoder_rs = comm.RSDecoder(N, K, BitInput = true);
     decodedsoft_rs_final = step(decoder_rs, decodedsoft_rs_desentrelace.');
     decodedsoft_rs_final = decodedsoft_rs_final.';
 
@@ -110,8 +109,8 @@ for i = 1:length(EbN0)
 
     %% Sans entrelacement
     % Bruit AWGN
-    Px_sans = mean(abs(signal_sans_filtre).^2);
-    sigma_sans = (Px_sans * Ns) / (2 * l * EbN0lin(i));
+    Px_sans = var(signal_sans_filtre);
+    sigma_sans = (Px_sans * Ns) / (2 * l * EbN0lin);
     bruit_reel_sans = sqrt(sigma_sans) * randn(size(signal_sans_filtre));
     bruit_imag_sans = sqrt(sigma_sans) * randn(size(signal_sans_filtre));
     bruit_sans = bruit_reel_sans + 1i * bruit_imag_sans;
@@ -141,6 +140,7 @@ for i = 1:length(EbN0)
     ecartsoft_sans = sum(bits ~= decodedsoft_sans_final);
     TEBsoft_sans(i) = ecartsoft_sans / nbits;
 end
+TEB_theo = qfunc(sqrt(2 * EbN0lin)); % TEB théorique pour la QPSK
 
 %% Affichage des résultats
 figure;
