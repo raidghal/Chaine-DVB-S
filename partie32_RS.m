@@ -1,15 +1,17 @@
 clear all;
 close all;
 
+&&&&&&&&&&& Partie32 Reed Solomon &&&&&&&&&&&&&&&&&&&&
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+
 %% Constantes d'entrée
-Bw = 40;
 M = 4; % Ordre de modulation
 l = log2(M); % Nombre de bits par symbole
-Ts = 1; % Durée d’un symbole
-Rs = 31.2; % Débit symbole (sym/s)
-Rb = Rs * l; % Débit binaire en bits par seconde
 alpha = 0.35; % Roll-off du filtre SRRC
-Fe = 24000; % Fréquence d'échantillonnage en Hz (Fe >= (1+alpha)*Rs)
 span = 10; % Longueur du filtre SRRC (en périodes symboles)
 Ns = 5; % Facteur de suréchantillonnage
 N = 204;
