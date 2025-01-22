@@ -1,21 +1,17 @@
 clear all 
 close all 
 
-%% Questions
-%pertinence codage interne externe 
-%pourquoi entraleceur au milieu 
+&&&&&&&&& Partie31 Poinconnage &&&&&&&&&&&&&&&&&&&&
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
 
 %% Constantes d'entrée
-Bw = 40;
 M = 4; % Ordre de modulation
 l = log2(M); % Nombre de bits par symbole
-Ts = 1; % Durée d’un symbole
-Rs = 31.2; % Débit symbole (sym/s). 
-Rb = Rs*l; % Débit binaire en bits par seconde 
-Ru = 0; % Débit utile en bits par seconde
-Tb = 1/Rb; % Durée d’un bit 
 alpha = 0.35; % Roll-off du filtre SRRC (Square Root Raised Cosine)           
-Fe = 2*Bw; % Fréquence d2échantillonnage en Hz.  Fe >= (1+alpha)*Rs.
 span = 10; % Longueur du filtre SRRC (en nombre de périodes symboles). 
 Ns = 5; % Facteur de suréchantillonnage
 N = 204;
