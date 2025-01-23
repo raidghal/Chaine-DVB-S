@@ -2,10 +2,10 @@ clear all;
 close all;
 
 
-&&&&&&&&&&&&&&&&&& Partie 2 Implantation du modulateur/demodulateur &&&&&&&&&&&&&&&&&&&&&&&
+%%%%%%%%%%%%%%%%% Partie 2 Implantation du modulateur/demodulateur %%%%%%%%%%%%%%%%%%%%%%%%
 
 
-&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Constantes d'entrée
 M = 4; % Ordre de modulation
