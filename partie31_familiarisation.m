@@ -16,7 +16,13 @@ treillis = poly2trellis(3, [5, 7]); % Treillis du code convolutif (longueur de c
 message = [0 1 0 1 1 0 1]; % Message binaire d'entrée
 code = convenc(message, treillis); % Encodage convolutif
 
-tb=5;
+tb=5; 
+%%%%%% en fait tb c'est egal à 5*(3-1)=10 , mais ça ne marche pas pour nous %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% le voila le lien de la documentation de matlab qui explique traceback depth
+%%%%%%%
+%%%%%%%  Lien:   https://fr.mathworks.com/help/comm/ref/vitdec.html#mw_2c82a38d-9b58-4751-84d2-7115d38d58db
+%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 decoded = vitdec(code,treillis,tb,'trunc','hard');
 
 % Nombre d'états dans le treillis (2^(longueur de contrainte - 1))
